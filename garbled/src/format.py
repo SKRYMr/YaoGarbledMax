@@ -89,7 +89,7 @@ def traditional_compute(a: List[int], b: List[int], bits: int):
     print("Full set:")
     print(f"{ss}")
     c = max(ss)
-    return f"{c:b}"
+    return f"{c:0{bits}b}"
 
 
 def verify_output(a, b):
