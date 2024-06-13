@@ -119,10 +119,19 @@ def main(bits: int = 4, set_size: int = 5, alice_input_file: str = "Alice.txt", 
         print(f"{Colors.FAIL}{bob_input_file} (Bob's input file) not found!{Colors.ENDC}")
         exit(1)
 
-    with open("Alice.txt", "r") as fin:
+    with open(alice_input_file, "r") as fin:
         # Alice's input
-        bits_a = [int(b) for b in fin.read().split()]
-        assert len(bits_a) % bits == 0, f"Numbers should be multiple of {bits} bits!"
+        bits_a = []
+        # Read character by character and discard anything that is not a 0 or 1
+        for line in fin.readlines():
+            for character in line:
+                if character == "1" or character == "0":
+                    bits_a.append(int(character))
+        # Ensure that the number of bits is a multiple of the set bit-length
+        if len(bits_a) % bits != 0:
+            print(f"{Colors.FAIL}Error in {alice_input_file}:{Colors.ENDC}")
+            print(f"{Colors.FAIL}Numbers should be multiple of {bits} bits!{Colors.ENDC}")
+            exit(1)
         # For maximum ease-of-use we pad or truncate the input to be of the correct set_size
         # Padding with all zeroes doesn't change the output of the function
         while len(bits_a) < set_size * bits:
@@ -130,10 +139,19 @@ def main(bits: int = 4, set_size: int = 5, alice_input_file: str = "Alice.txt", 
         while len(bits_a) > set_size * bits:
             bits_a.pop()
 
-    with open("Bob.txt", "r") as fin:
+    with open(bob_input_file, "r") as fin:
         # Bob's input
-        bits_b = [int(b) for b in fin.read().split()]
-        assert len(bits_b) % bits == 0, f"Numbers should be multiple of {bits} bits!"
+        bits_b = []
+        # Read character by character and discard anything that is not a 0 or 1
+        for line in fin.readlines():
+            for character in line:
+                if character == "1" or character == "0":
+                    bits_b.append(int(character))
+        # Ensure that the number of bits is a multiple of the set bit-length
+        if len(bits_b) % bits != 0:
+            print(f"{Colors.FAIL}Error in {bob_input_file}:{Colors.ENDC}")
+            print(f"{Colors.FAIL}Numbers should be multiple of {bits} bits!{Colors.ENDC}")
+            exit(1)
         # For maximum ease-of-use we pad or truncate the input to be of the correct set_size
         # Padding with all zeroes doesn't change the output of the function
         while len(bits_b) < set_size * bits:
