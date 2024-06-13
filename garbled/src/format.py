@@ -224,5 +224,9 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
+    if args.set_size < 1 or args.set_size > 2 ** 4:
+        print(f"{Colors.FAIL}Set size should be between 1 and {2**4}!{Colors.ENDC}")
+        exit(1)
+
     # Bits are hard-coded to 4
     main(4, args.set_size, args.alice, args.bob)
