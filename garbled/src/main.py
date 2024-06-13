@@ -3,7 +3,7 @@ import logging
 import ot
 import util
 import yao
-from abc import ABC, abstractmethod
+from abc import ABC
 
 logging.basicConfig(format="[%(author)s] %(message)s",
                     level=logging.DEBUG)
