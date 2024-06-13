@@ -30,10 +30,6 @@ class YaoGarbler(ABC):
             }
             self.circuits.append(entry)
 
-    # @abstractmethod
-    # def start(self):
-    #     pass
-
 
 class Alice(YaoGarbler):
     """Alice is the creator of the Yao circuit.
@@ -59,18 +55,6 @@ class Alice(YaoGarbler):
         self.bits = bits
         self.socket = util.GarblerSocket()
         self.ot = ot.ObliviousTransfer(self.socket, enabled=oblivious_transfer)
-
-    # def start(self):
-    #     """Start Yao protocol."""
-    #     for circuit in self.circuits:
-    #         to_send = {
-    #             "circuit": circuit["circuit"],
-    #             "garbled_tables": circuit["garbled_tables"],
-    #             "pbits_out": circuit["pbits_out"],
-    #         }
-    #         logging.debug(f"Sending {circuit['circuit']['id']}")
-    #         self.socket.send_wait(to_send)
-    #         self.print(circuit)
 
     def print(self, entry):
         """Print circuit evaluation for all Bob and Alice inputs.
